@@ -1,12 +1,14 @@
 from machine import RTC
 from machine import sleep
+import time
 import network
 import ntptime
 import gc
 
 wlan = network.WLAN(network.STA_IF)
 wlan.active(True)
-wlan.connect('Pochoclo-4G', 'laclavees1981') #replace with your WiFi ssid and password
+wlan.connect('DEEPFAKE', 'Callefalsa123') #replace with your WiFi ssid and password
+print('Conectando a red...')
 while not wlan.isconnected():
     pass
 
@@ -16,7 +18,7 @@ if wlan.isconnected():
 rtc = RTC()
 ntptime.settime()
 
-year, month, day, weekday, hour, minutes, seconds, subsecond = rtc.datetime()
+print(rtc.datetime())
 
 while True:
     year, month, day, weekday, hour, minutes, seconds, subsecond = rtc.datetime()
@@ -28,7 +30,12 @@ while True:
         hour = 23
     elif hour == 3:
         hour = 0
+    else:
+        hour = hour - 3
     
+    if minutes == 0:
+        time.localtime()
+
     print(f'{day}/{month}/{year} - {hour}:{minutes}:{seconds}' )
     sleep(1000)
     gc.collect()
